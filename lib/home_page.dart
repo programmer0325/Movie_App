@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 "Trending Movies",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
-                  fontSize: 25,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
