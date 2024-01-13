@@ -7,11 +7,10 @@ import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key, required this.movie});
-
   final Movie movie;
-
   @override
   Widget build(BuildContext context) {
+    // Access the FavoriteMoviesProvider using the context.
     var favoriteMoviesProvider = context.read<FavoriteMoviesProvider>();
     return Scaffold(
      body: CustomScrollView(
@@ -20,6 +19,7 @@ class DetailsScreen extends StatelessWidget {
           expandedHeight: 500,
           pinned: true,
           floating: true,
+          // Leading icon for navigating back to the previous screen.
           leading: Container(
             width: 70,
             height: 70,
@@ -47,6 +47,7 @@ class DetailsScreen extends StatelessWidget {
             ),
           ),
         ),
+         // Details section of the movie.
       SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -61,6 +62,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10,),
+                // Movie overview.
                 Text(
                   movie.overview,
                   style: TextStyle(
@@ -70,9 +72,11 @@ class DetailsScreen extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 10,),
+                // Release date and rating.
                 SizedBox(
                   child: Row(
                     children: [
+                      // Release date.
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -100,7 +104,8 @@ class DetailsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
+                      // Rating.
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -133,6 +138,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10,),
+                // Additional movie information.
                 SizedBox(
                   child: Row(
                     children: [
@@ -156,6 +162,7 @@ class DetailsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10,),
+                      // Backdrop path.
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -178,6 +185,7 @@ class DetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                // Button to add the movie to favorites.
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ElevatedButton(

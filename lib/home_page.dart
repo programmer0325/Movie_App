@@ -11,13 +11,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Declaring a Future to fetch the trending movies.
   late Future<List<Movie>> trendingMovies;
 
-
+// Declaring the initState function for fetching API class
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // Initialize the Future to fetch trending movies using the Api class.
     trendingMovies = Api().getTrendingMovies();
   }
 
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           "Movie App",
           style: TextStyle(
-              fontSize: 20,
+              fontSize: 23,
               color: Theme.of(context).colorScheme.primary,
           ),
         ),
@@ -50,19 +52,23 @@ class _HomePageState extends State<HomePage> {
             ),
             Center(
               child: FutureBuilder(
+                // Use FutureBuilder to asynchronously build UI based on the trendingMovies Future.
                   future: trendingMovies,
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
+                      // Display an error message if fetching data fails.
                       return Center(
                         child: Text(
                           snapshot.error.toString(),
                         ),
                       );
                     } else if (snapshot.hasData) {
+                      // If data is available, display the TrendingSlider widget.
                       return TrendingSlider(
                         snapshot: snapshot,
                       );
                     } else {
+                      // Display a loading indicator while waiting for data.
                       return const Center(
                         child: CircularProgressIndicator(),
                       );

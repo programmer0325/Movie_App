@@ -14,7 +14,9 @@ class _FavoriteMoviesScreenState extends State<FavoriteMoviesScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+        // Watch for changes in the FavoriteMoviesProvider using context.watch().
         var favoriteMoviesProvider = context.watch<FavoriteMoviesProvider>();
+        // Retrieve the list of favorite movies from the provider.
         List<Movie> favoriteMovies = favoriteMoviesProvider.favoriteMovies;
 
         return Scaffold(
@@ -27,6 +29,7 @@ class _FavoriteMoviesScreenState extends State<FavoriteMoviesScreen> {
             ),
           ),
           body: ListView.builder(
+            // Use the length of the favoriteMovies list as the itemCount.
             itemCount: favoriteMovies.length,
             itemBuilder: (context, index) {
               return ListTile(
@@ -36,7 +39,7 @@ class _FavoriteMoviesScreenState extends State<FavoriteMoviesScreen> {
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 ),
-                // Add more details or customize the UI as needed
+                // we can add more details or customize the UI as needed
               );
             },
           ),
