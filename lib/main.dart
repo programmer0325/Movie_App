@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // this remove the banner
       theme: lightMode,  // Set the default theme to light mode.
       darkTheme: darkMode,  // Set the dark mode theme.
       home: const HomePage(),  // Set the initial home page as HomePage.
