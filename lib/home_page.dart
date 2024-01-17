@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api.dart';
 import 'package:movie_app/models/movie.dart';
+import 'package:movie_app/widgets/movie_slider.dart';
 import 'package:movie_app/widgets/trending_slider.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,46 +38,65 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body:  Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Trending Movies",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+      body:  SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    "Trending Movies",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+                Center(
+                  child: FutureBuilder(
+                    // Use FutureBuilder to asynchronously build UI based on the trendingMovies Future.
+                      future: trendingMovies,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          // Display an error message if fetching data fails.
+                          return Center(
+                            child: Text(
+                              snapshot.error.toString(),
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          // If data is available, display the TrendingSlider widget.
+                          return TrendingSlider(
+                            snapshot: snapshot,
+                          );
+                        } else {
+                          // Display a loading indicator while waiting for data.
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      }),
+                ),
+                const SizedBox(height: 10,),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    "new Movies",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const MoveSlider(),
+             ],
             ),
-            Center(
-              child: FutureBuilder(
-                // Use FutureBuilder to asynchronously build UI based on the trendingMovies Future.
-                  future: trendingMovies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      // Display an error message if fetching data fails.
-                      return Center(
-                        child: Text(
-                          snapshot.error.toString(),
-                        ),
-                      );
-                    } else if (snapshot.hasData) {
-                      // If data is available, display the TrendingSlider widget.
-                      return TrendingSlider(
-                        snapshot: snapshot,
-                      );
-                    } else {
-                      // Display a loading indicator while waiting for data.
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
-            ),
-         ],
         ),
+      ),
     );
   }
 }

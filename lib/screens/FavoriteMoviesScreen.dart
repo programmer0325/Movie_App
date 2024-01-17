@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/provider/favorite_Movies_Provider.dart';
 import 'package:provider/provider.dart';
+
 class FavoriteMoviesScreen extends StatefulWidget {
   const FavoriteMoviesScreen({Key? key}) : super(key: key);
 
