@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Declaring a Future to fetch the trending movies.
   late Future<List<Movie>> trendingMovies;
-
+  late Future<List<Movie>> topRatedMovies;
 // Declaring the initState function for fetching API class
   @override
   void initState() {
@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // Initialize the Future to fetch trending movies using the Api class.
     trendingMovies = Api().getTrendingMovies();
+    topRatedMovies = Api().getTopRatedMovies();
   }
 
   @override
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    "new Movies",
+                    "Top Rated Movies",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 25,
@@ -92,7 +93,30 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const MoveSlider(),
+                Center(
+                  child: FutureBuilder(
+                    // Use FutureBuilder to asynchronously build UI based on the trendingMovies Future.
+                      future: topRatedMovies,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          // Display an error message if fetching data fails.
+                          print("Error: ${snapshot.error}");
+                          return Center(
+                            child: Text(
+                              "An error occurred: ${snapshot.error}",
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          // If data is available, display the TrendingSlider widget.
+                          return MoveSlider(snapshot: snapshot);
+                        } else {
+                          // Display a loading indicator while waiting for data.
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      }),
+                ),
              ],
             ),
         ),
