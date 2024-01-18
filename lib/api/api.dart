@@ -32,7 +32,7 @@ import 'package:movie_app/models/movie.dart';
        if(response.statusCode == 200){
          // Decode the JSON response and extract the 'results' field.
          final decodedData = json.decode(response.body)['results'] as List;
-         // print(decodedData);
+          print(decodedData);
          // Map the decoded data to a list of Movie objects using the Movie.fromJson factory constructor.
          return decodedData.map((movie) => Movie.fromJason(movie)).toList();
          // If the response status code is not 200, throw an exception.

@@ -52,7 +52,8 @@ class TrendingSlider extends StatelessWidget {
                 child: Image.network(
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
-                    "${Secrets.imagePath}${snapshot.data[itemIndex].posterPath}"),
+                    "${Secrets.imagePath}${snapshot.data[itemIndex].posterPath}"
+                ),
               ),
             ),
           );

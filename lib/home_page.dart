@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Trending Movies",
                     style: TextStyle(

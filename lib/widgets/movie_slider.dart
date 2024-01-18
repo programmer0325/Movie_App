@@ -15,7 +15,7 @@ class MoveSlider extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
-          itemCount: 10,
+          itemCount: snapshot.data.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -35,6 +35,11 @@ class MoveSlider extends StatelessWidget {
                   child: SizedBox(
                     height: 100,
                     width: 180,
+                    child: Image.network(
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        "${Secrets.imagePath}${snapshot.data![index].posterPath}"
+                    ),
                   ),
                 ),
               ),
